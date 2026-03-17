@@ -44,6 +44,9 @@ public class Manager {
             else
                 return;
         }
+        if(!outputFile.getName().toLowerCase().endsWith(".jpg"))
+            outputFile= new File(outputFile.getAbsolutePath()+".jpg");
+
         ImageIO.write(image,"jpg",outputFile);
             System.out.println("Image saved");
         }
