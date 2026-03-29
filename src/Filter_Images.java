@@ -152,5 +152,28 @@ BufferedImage result=new BufferedImage(img.getWidth(),img.getHeight(),img.getTyp
 }
 return result;
 }
-}
 
+BufferedImage applyBrightness(BufferedImage img,int value)
+{
+    BufferedImage result=new BufferedImage(img.getWidth(),img.getHeight(),img.getType());
+
+    for (int y = 0; y < img.getHeight(); ++y) {
+        for (int x = 0; x < img.getWidth(); ++x) {
+
+            int RGB = img.getRGB(x, y);
+
+            int A = (RGB >> 24) & 0xff;
+            int R = (RGB >> 16) & 0xff;
+            int G = (RGB >> 8) & 0xff;
+            int B = RGB & 0xff;
+
+            R=clamp(R+value);
+            G=clamp(G+value);
+            B=clamp(B+value);
+            int NewRGB=(A<<24)|(R<<16)|(G<<8)|B;
+            result.setRGB(x,y,NewRGB);
+        }
+    }
+    return result;
+}
+}
